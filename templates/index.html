@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>정보검색 과제 - 2017114567 이주형</title>
+</head>
+<body>
+    <h1>
+        Ranked Retrieval System
+    </h1>
+    <h2>
+        컴퓨터학부 2017114567 이주형
+    </h2>
+<hr>
+<form method="get" action="/query_in">
+    <input name="query" type="number">
+    <button type="submit">Search</button>
+</form>
+{% for i in range(query) %}
+{{ i }}
+{% endfor %}
+</body>
+</html>
