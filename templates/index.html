@@ -1,4 +1,31 @@
 <!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&amp;subset=korean" rel="stylesheet">
+<style type="text/css">
+    body {
+       font-family: "Nanum Gothic", sans-serif;
+    }
+    h1, h2 {
+        text-align: center;
+    }
+    form {
+        margin: 0 auto;
+        text-align: center;
+        width: 80%;
+        height: 30pt;
+        box-sizing: border-box;
+
+        /* To harmonize the look & feel of text field border */
+        border: 1px solid #999;
+    }
+    input {
+        width: 70%;
+    }
+    input, button {
+        margin: 3px 0 3px 0;
+        font-size: 14pt;
+        height: 20pt;
+    }
+</style>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,11 +40,17 @@
     </h2>
 <hr>
 <form method="get" action="/query_in">
-    <input name="query" type="number">
+    <input name="query" type="text">
     <button type="submit">Search</button>
 </form>
-{% for i in range(query) %}
-{{ i }}
-{% endfor %}
+    {% if result %}
+        {% for i in range(result|length) %}
+            <h3>{{ result[i][0]|string+'. '+result[i][1] }}</h3>
+            {{ result[i][2] }}
+            <br>
+        {% endfor %}
+    {% else %}
+        <h3>검색 결과가 없습니다.</h3>
+    {% endif %}
 </body>
 </html>

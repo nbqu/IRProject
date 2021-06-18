@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-import requests
+import IR_lib
 
 app = Flask(__name__)
 
@@ -10,14 +10,19 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+
 @app.route('/query_in', methods=['GET'])
 def query_in():
-    query = int(request.args.get('query'))
-    return render_template('index.html', query=query)
+    query = request.args.get('query')
+    tokenized = IR_lib.process_query(query)
 
-@app.route('/user/<user_name>/<int:user_id>')
-def user(user_name, user_id):
-    return f'Hello, {user_name}({user_id})!'
+    return render_template('index.html', result=IR_lib.consine_rank(tokenized))
+
+
+@app.before_first_request
+def dfr():
+    return IR_lib.init()
+
 
 if __name__ == '__main__':
     app.run(debug=True)
